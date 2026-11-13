@@ -1,4 +1,4 @@
-{ nixos-raspberrypi, settings, ... }:
+{ nixos-raspberrypi, settings, lib, ... }:
 
 {
   imports = with nixos-raspberrypi.nixosModules; [
@@ -6,10 +6,11 @@
     trusted-nix-caches
   ];
 
-  # HDMI 0 has one subdevice: only one program can play at a time, so only one gadget can have sound
+  # HDMI 0 has one subdevice: only one program can play at a time, so only one gadget can use the Pi's sound
+  # (the musical numbers play on the phone)
   assertions = [{
-    assertion = builtins.length settings.gadgets < 2;
-    message = "rpi5: HDMI sound plays one program at a time, so choose one gadget in gadgets.nix";
+    assertion = lib.count (gadget: lib.elem gadget [ "typing-game" "musical-keyboard" ]) settings.gadgets < 2;
+    message = "rpi5: HDMI sound plays one program at a time, so choose the typing game or the musical keyboard in gadgets.nix";
   }];
 
   # Pi 5 has no headphone jack. PipeWire does not start for root (ConditionUser=!root) and the

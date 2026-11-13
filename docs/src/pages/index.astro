@@ -37,12 +37,20 @@ const gadgets = [
       [violin, 'A violin, with the notes C, E and G held down.'],
     ],
   },
+  {
+    slug: 'musical-numbers',
+    name: 'Musical Numbers',
+    color: 'orange',
+    text: 'Pick up a real telephone and press one number. The phone plays the song for that number.',
+    keypad: true,
+  },
 ];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
 const why = [
-  ['O', 'tomato', 'Offline', 'Nothing on the card uses the internet. Wi-Fi is off. No accounts, no updates, no ads.'],
-  ['K', 'sun', 'Keyboard only', 'No mouse, no pointer to chase. Press a key and something happens. Every action is on purpose.'],
-  ['A', 'sky', 'Letters & words', 'The keys have letters on them. The typing game says each letter and builds a word. Reading practice that feels like play.'],
+  ['O', 'tomato', 'Offline', 'Nothing on the card uses the internet. Wi-Fi is off. The phone talks to the Pi over one cable. No accounts, no updates, no ads.'],
+  ['K', 'sun', 'Keys only', 'No mouse, no pointer to chase. Press a key or a phone button and something happens. Every action is on purpose.'],
+  ['A', 'sky', 'Letters & numbers', 'The keys have letters on them. The typing game says each letter and builds a word. On the phone, each number is a song.'],
   ['U', 'grass', 'Use it alone', 'No menus, no scores, no timers, no “wrong” sounds. Your child explores without a parent at their shoulder.'],
   ['C', 'grape', 'Curious about computers', 'A real computer, a real keyboard, a real terminal. Not a locked tablet.'],
 ];
@@ -50,7 +58,7 @@ const why = [
 const guides = [
   ['build', 'sun', 'B', 'Build', 'Install Nix, build the image, write the SD card.'],
   ['hardware', 'grass', 'H', 'Hardware', 'What to buy and how to connect it.'],
-  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices and instruments.'],
+  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices, instruments and songs.'],
 ];
 ---
 
@@ -70,7 +78,7 @@ const guides = [
     </h1>
     <p class="tagline on-confetti">Small computer toys for small children.</p>
     <p class="lede on-confetti">
-      Build them onto an SD card, put the card in a Raspberry Pi, and your child plays with a keyboard.
+      Build them onto an SD card, put the card in a Raspberry Pi, and your child plays with a keyboard, a music keyboard and a telephone.
       There is no mouse, no internet and no ads. I made them for my son, Gil. Other parents can use them too.
     </p>
   </section>
@@ -83,7 +91,12 @@ const guides = [
           <span class="tv">
             <span class="antenna" aria-hidden="true"></span>
             <span class="screen">
-              {g.frames.map(([img, alt]) => (
+              {g.keypad ? (
+                <span class="keypad" role="img" aria-label="A telephone keypad. The 1 key is pressed, and a song plays.">
+                  {keys.map((k) => <span class:list={['key', { lit: k === '1' }]}>{k}</span>)}
+                  <span class="note" aria-hidden="true">♪</span>
+                </span>
+              ) : g.frames.map(([img, alt]) => (
                 <img src={img.src} width={img.width} height={img.height} alt={alt} />
               ))}
             </span>
@@ -113,7 +126,7 @@ const guides = [
   <section class="section make" aria-labelledby="make">
     <h2 id="make" style="--c: var(--grass)">Make your own</h2>
     <p class="make-text on-confetti">
-      You need a Linux computer with Nix, a Raspberry Pi 4 or 5, and some basic skill with a terminal.
+      You need a Linux computer or an Apple Silicon Mac with Nix, a Raspberry Pi 4 or 5, and some basic skill with a terminal.
       Then it is one command: <kbd>./build.sh</kbd>
     </p>
     <ul class="guides">
@@ -311,6 +324,48 @@ const guides = [
   @keyframes frame {
     0% { opacity: 1; }
     33.33% { opacity: 0; }
+  }
+
+  /* Musical numbers: a phone keypad on the screen. The 1 key is pressed, and a note floats up. */
+  .keypad {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    aspect-ratio: 4 / 3;
+    padding: 1rem 18%;
+  }
+  .key {
+    display: grid;
+    place-items: center;
+    border: 3px solid #555;
+    border-radius: 0.7rem;
+    background: #1b1b1b;
+    color: #eee;
+    font-weight: 700;
+    font-size: clamp(1rem, 3.5vw, 1.6rem);
+  }
+  .key.lit {
+    border-color: var(--ink);
+    background: var(--orange);
+    color: var(--ink);
+    animation: press 1.6s ease-in-out infinite;
+  }
+  .note {
+    position: absolute;
+    top: 0.4rem;
+    left: 10%;
+    color: var(--sun);
+    font-size: clamp(1.6rem, 6vw, 2.6rem);
+    animation: float 1.6s ease-in-out infinite;
+  }
+  @keyframes press {
+    50% { scale: 0.88; }
+  }
+  @keyframes float {
+    0% { translate: 0 1.5rem; opacity: 0; }
+    50% { opacity: 1; }
+    100% { translate: 0 -0.3rem; opacity: 0; }
   }
 
   .knobs {

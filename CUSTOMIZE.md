@@ -1,6 +1,6 @@
 # Customize
 
-Make the gadgets your child's own: their favorite things as words and pictures, and your voice saying the letters. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
+Make the gadgets your child's own: their favorite things as words and pictures, your voice saying the letters, and their favorite songs on the phone. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
 
 ## The typing game
 
@@ -189,6 +189,27 @@ Each line has a name, a bank and a program:
 To remove an instrument, delete its line and its picture. Keep the line for `drum kit 1`, because the pads use that kit while a normal instrument is on the screen.
 
 To try your change on your computer, see [Run it on your computer](musical-keyboard/README.md#run-it-on-your-computer).
+
+## The musical numbers
+
+Each number on the phone plays the file with that number in `musical-numbers/songs/`: `1.mp3`, `2.flac`, and so on. Any audio format works, and you need one file for each number at most.
+
+### Example: put a new song on 3
+
+Your child asks for "the twinkle song" all day. Put it on number 3:
+
+```sh
+cd gils-gadgets/musical-numbers
+mkdir -p songs
+rm -f songs/3.*
+cp ~/Music/twinkle-twinkle.mp3 songs/3.mp3
+ls songs/
+```
+
+- `rm -f songs/3.*` removes the old song for 3, in any format. There must be only one file for each number.
+- To take a number away, delete its file. The number then does not connect.
+
+Then build and write the card. When your child presses 3, the twinkle song plays.
 
 ## After every change
 

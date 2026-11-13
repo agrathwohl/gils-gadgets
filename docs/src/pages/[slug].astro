@@ -2,6 +2,7 @@
 import Layout from '../Layout.astro';
 import * as typingGame from '../../../typing-game/README.md';
 import * as musicalKeyboard from '../../../musical-keyboard/README.md';
+import * as musicalNumbers from '../../../musical-numbers/README.md';
 import * as build from '../../../BUILD.md';
 import * as hardware from '../../../HARDWARE.md';
 import * as customize from '../../../CUSTOMIZE.md';
@@ -10,6 +11,7 @@ export function getStaticPaths() {
   return Object.entries({
     'typing-game': typingGame,
     'musical-keyboard': musicalKeyboard,
+    'musical-numbers': musicalNumbers,
     build,
     hardware,
     customize,

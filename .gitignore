@@ -1,7 +1,5 @@
-# Run as a server, with private files: not part of Gil's Gadgets
-/musical-numbers/
-
 # Personal or large files. The build still uses them when they are in the folder.
+/musical-numbers/songs/
 /typing-game/audio/
 /musical-keyboard/*.sf2
 
