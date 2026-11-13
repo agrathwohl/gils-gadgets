@@ -1,0 +1,14 @@
+# Run as a server, with private files: not part of Gil's Gadgets
+/musical-numbers/
+
+# Personal or large files. The build still uses them when they are in the folder.
+/typing-game/audio/
+/musical-keyboard/*.sf2
+
+# Build output and tools
+/result*
+/docs/node_modules/
+/docs/dist/
+/docs/.astro/
+__pycache__/
+.omc/

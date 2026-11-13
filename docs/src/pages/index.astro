@@ -1,0 +1,446 @@
+---
+import Layout from '../Layout.astro';
+import start from '../../../typing-game/screenshots/start.png';
+import typing from '../../../typing-game/screenshots/typing.png';
+import done from '../../../typing-game/screenshots/done.png';
+import violin from '../../../musical-keyboard/screenshots/violin.png';
+import trumpet from '../../../musical-keyboard/screenshots/trumpet.png';
+import drums from '../../../musical-keyboard/screenshots/drums.png';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const colors = ['tomato', 'sun', 'sky', 'grass', 'grape', 'orange'];
+const words = ['GIL’S', 'GADGETS'];
+let i = 0;
+const blockStyle = (n: number) =>
+  `--i: ${n}; --r: ${((n * 7) % 5 - 2) * 3}deg; --c: var(--${colors[n % colors.length]})`;
+
+const gadgets = [
+  {
+    slug: 'typing-game',
+    name: 'Typing Game',
+    color: 'tomato',
+    text: 'A big letter shows. Your child types it. A picture shows a little more with each letter, and a voice says the letter. At the end, the voice says the word.',
+    frames: [
+      [start, 'The game asks for T, the first letter of TRUCK. The picture is hidden.'],
+      [typing, 'T, R and U are typed. The top of the truck shows.'],
+      [done, 'The word TRUCK is done. The whole truck shows.'],
+    ],
+  },
+  {
+    slug: 'musical-keyboard',
+    name: 'Musical Keyboard',
+    color: 'sky',
+    text: 'Plug in a USB MIDI keyboard and play real instrument sounds. A picture of the instrument fills the screen.',
+    frames: [
+      [trumpet, 'A trumpet, with the notes G and C held down.'],
+      [drums, 'Drum kit 1.'],
+      [violin, 'A violin, with the notes C, E and G held down.'],
+    ],
+  },
+];
+
+const why = [
+  ['O', 'tomato', 'Offline', 'Nothing on the card uses the internet. Wi-Fi is off. No accounts, no updates, no ads.'],
+  ['K', 'sun', 'Keyboard only', 'No mouse, no pointer to chase. Press a key and something happens. Every action is on purpose.'],
+  ['A', 'sky', 'Letters & words', 'The keys have letters on them. The typing game says each letter and builds a word. Reading practice that feels like play.'],
+  ['U', 'grass', 'Use it alone', 'No menus, no scores, no timers, no “wrong” sounds. Your child explores without a parent at their shoulder.'],
+  ['C', 'grape', 'Curious about computers', 'A real computer, a real keyboard, a real terminal. Not a locked tablet.'],
+];
+
+const guides = [
+  ['build', 'sun', 'B', 'Build', 'Install Nix, build the image, write the SD card.'],
+  ['hardware', 'grass', 'H', 'Hardware', 'What to buy and how to connect it.'],
+  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices and instruments.'],
+];
+---
+
+<Layout>
+  <section class="hero">
+    <h1>
+      <span class="sr-only">Gil’s Gadgets</span>
+      <span class="blocks" aria-hidden="true">
+        {words.map((word) => (
+          <span class="word">
+            {[...word].map((ch) => ch === '’'
+              ? <span class="apos">’</span>
+              : <span class="block" style={blockStyle(i++)}>{ch}</span>)}
+          </span>
+        ))}
+      </span>
+    </h1>
+    <p class="tagline on-confetti">Small computer toys for small children.</p>
+    <p class="lede on-confetti">
+      Build them onto an SD card, put the card in a Raspberry Pi, and your child plays with a keyboard.
+      There is no mouse, no internet and no ads. I made them for my son, Gil. Other parents can use them too.
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="gadgets">
+    <h2 id="gadgets" style="--c: var(--tomato)">The gadgets</h2>
+    <div class="cards">
+      {gadgets.map((g) => (
+        <a class="card" href={`${base}/${g.slug}/`} style={`--c: var(--${g.color})`}>
+          <span class="tv">
+            <span class="antenna" aria-hidden="true"></span>
+            <span class="screen">
+              {g.frames.map(([img, alt]) => (
+                <img src={img.src} width={img.width} height={img.height} alt={alt} />
+              ))}
+            </span>
+            <span class="knobs" aria-hidden="true"><i></i><i></i></span>
+          </span>
+          <h3 class="card-name">{g.name}</h3>
+          <p class="card-text">{g.text}</p>
+          <span class="go">How it works <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="why">
+    <h2 id="why" style="--c: var(--sky)">Why</h2>
+    <ul class="why">
+      {why.map(([letter, color, title, text]) => (
+        <li style={`--c: var(--${color})`}>
+          <span class="why-letter" aria-hidden="true">{letter}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section make" aria-labelledby="make">
+    <h2 id="make" style="--c: var(--grass)">Make your own</h2>
+    <p class="make-text on-confetti">
+      You need a Linux computer with Nix, a Raspberry Pi 4 or 5, and some basic skill with a terminal.
+      Then it is one command: <kbd>./build.sh</kbd>
+    </p>
+    <ul class="guides">
+      {guides.map(([slug, color, letter, name, text]) => (
+        <li>
+          <a href={`${base}/${slug}/`} style={`--c: var(--${color})`}>
+            <span class="guide-letter" aria-hidden="true">{letter}</span>
+            <span class="guide-name">{name}</span>
+            <span class="guide-text">{text}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Hero: the name in alphabet blocks */
+  .hero { text-align: center; padding-block: 1.5rem 2rem; }
+  h1 { margin: 0 0 2.2rem; }
+
+  .blocks {
+    --b: min(11.5vw, 5rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--b) * 0.35) calc(var(--b) * 0.5);
+  }
+  @media (min-width: 900px) { .blocks { --b: min(6.3vw, 5.6rem); } }
+
+  .word { display: flex; gap: calc(var(--b) * 0.1); }
+
+  .block {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--b);
+    aspect-ratio: 1;
+    background: var(--c);
+    border: calc(var(--b) * 0.07) solid var(--ink);
+    border-radius: 22%;
+    box-shadow: calc(var(--b) * 0.08) calc(var(--b) * 0.08) 0 var(--ink);
+    font-size: calc(var(--b) * 0.62);
+    font-weight: 700;
+    line-height: 1;
+    rotate: var(--r);
+    animation:
+      drop 0.9s cubic-bezier(0.3, 1.4, 0.5, 1) calc(var(--i) * 70ms) both,
+      bob 3.4s ease-in-out calc(1.2s + var(--i) * 150ms) infinite;
+    transition: scale 0.15s;
+  }
+  /* The inner frame of a wooden alphabet block */
+  .block::before {
+    content: '';
+    position: absolute;
+    inset: 9%;
+    border: calc(var(--b) * 0.035) solid rgb(29 29 27 / 0.3);
+    border-radius: 18%;
+  }
+  .block:hover { scale: 1.12; }
+
+  .apos {
+    align-self: flex-start;
+    margin-inline: calc(var(--b) * -0.02);
+    font-size: calc(var(--b) * 1.1);
+    font-weight: 700;
+    line-height: 0.8;
+  }
+
+  @keyframes drop {
+    from { translate: 0 -120vh; }
+    to { translate: 0 0; }
+  }
+  @keyframes bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -8%; }
+  }
+
+  .tagline {
+    margin: 0 auto 0.75rem;
+    max-width: 18ch;
+    font-size: clamp(2rem, 1.4rem + 3vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .lede {
+    margin: 0 auto;
+    max-width: 44ch;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+    text-wrap: pretty;
+  }
+
+  /* Section headings with a crayon squiggle */
+  .section { padding-block: 3rem 1rem; }
+  .section h2 {
+    margin: 0 0 2.5rem;
+    text-align: center;
+    font-size: clamp(2.4rem, 1.8rem + 3vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section h2::after {
+    content: '';
+    display: block;
+    width: 4.5em;
+    height: 0.3em;
+    margin: 0.15em auto 0;
+    background: var(--c);
+    mask: var(--squiggle) 0 50% / auto 100% repeat-x;
+  }
+
+  /* Gadget cards: screenshots on a toy TV */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: 3.5rem 2.5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: clamp(1.1rem, 3vw, 2rem);
+    padding-top: 3.6rem;
+    background: var(--paper);
+    border: var(--line) solid var(--ink);
+    border-radius: 2rem;
+    box-shadow: 10px 10px 0 var(--ink);
+    text-decoration: none;
+    rotate: -1.2deg;
+    transition: rotate 0.2s, translate 0.2s, box-shadow 0.2s;
+  }
+  .card:nth-child(even) { rotate: 1.2deg; }
+  .card:hover { rotate: 0deg; translate: -4px -4px; box-shadow: 14px 14px 0 var(--ink); }
+
+  .tv {
+    position: relative;
+    display: block;
+    padding: clamp(0.8rem, 2.5vw, 1.2rem);
+    padding-bottom: 3.4rem;
+    background: var(--c);
+    border: var(--line) solid var(--ink);
+    border-radius: 1.8rem;
+  }
+
+  .antenna {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 0;
+    height: 2.6rem;
+  }
+  .antenna::before, .antenna::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -7px;
+    width: 14px;
+    height: 3rem;
+    transform-origin: 50% 100%;
+    rotate: -28deg;
+    background:
+      radial-gradient(circle at 50% 7px, var(--ink) 6px, transparent 7px),
+      linear-gradient(var(--ink), var(--ink)) 50% 7px / 5px 100% no-repeat;
+  }
+  .antenna::after { rotate: 28deg; }
+
+  .screen {
+    display: grid;
+    background: #000;
+    border: 4px solid var(--ink);
+    border-radius: 1.1rem;
+    overflow: hidden;
+  }
+  .screen img {
+    grid-area: 1 / 1;
+    width: 100%;
+    padding: 0.5rem;
+    animation: frame 9s step-end infinite;
+  }
+  .screen img:nth-child(1) { animation-delay: -6s; }
+  .screen img:nth-child(2) { animation-delay: -3s; }
+  /* Each frame shows for 3 seconds, the last one first: the game plays itself.
+     With reduced motion the animation is off and the last frame, on top, stays. */
+  @keyframes frame {
+    0% { opacity: 1; }
+    33.33% { opacity: 0; }
+  }
+
+  .knobs {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .knobs i {
+    width: 1.8rem;
+    aspect-ratio: 1;
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    background-image: linear-gradient(var(--ink), var(--ink));
+    background-size: 4px 55%;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+  }
+  .knobs i:last-child { rotate: 70deg; }
+
+  .card-name {
+    margin: 0.4rem 0 0;
+    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .card-text { margin: 0; font-size: 1.2rem; }
+  .go {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0.45em 1.1em;
+    background: var(--c);
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-weight: 600;
+  }
+
+  /* Why: big colorful blocks */
+  .why {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .why li {
+    flex: 1 1 19rem;
+    max-width: 24rem;
+    position: relative;
+    overflow: hidden;
+    padding: 1.6rem 1.6rem 1.8rem;
+    background: var(--c);
+    border: var(--line) solid var(--ink);
+    border-radius: 1.8rem;
+    box-shadow: 8px 8px 0 var(--ink);
+    rotate: -1.5deg;
+  }
+  .why li:nth-child(even) { rotate: 1.3deg; }
+  .why li:nth-child(3n) { rotate: -0.6deg; }
+  .why-letter {
+    position: absolute;
+    right: -0.05em;
+    bottom: -0.28em;
+    font-size: 9rem;
+    font-weight: 700;
+    line-height: 1;
+    color: rgb(29 29 27 / 0.13);
+  }
+  .why h3 {
+    position: relative;
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.7rem, 1.4rem + 1vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .why p { position: relative; margin: 0; font-size: 1.2rem; }
+
+  /* Make your own */
+  .make-text {
+    max-width: 40ch;
+    margin: -1rem auto 2.5rem;
+    text-align: center;
+    font-size: clamp(1.2rem, 1rem + 0.7vw, 1.45rem);
+    text-wrap: balance;
+  }
+  .make-text kbd { white-space: nowrap; }
+
+  .guides {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .guides a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 1rem;
+    align-items: center;
+    height: 100%;
+    padding: 1.4rem;
+    background: var(--paper);
+    border: var(--line) solid var(--ink);
+    border-radius: 1.8rem;
+    box-shadow: 8px 8px 0 var(--c);
+    text-decoration: none;
+    transition: translate 0.15s, box-shadow 0.15s;
+  }
+  .guides a:hover { translate: -3px -3px; box-shadow: 11px 11px 0 var(--c); }
+  .guide-letter {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 4.2rem;
+    aspect-ratio: 1;
+    background: var(--c);
+    border: var(--line) solid var(--ink);
+    border-radius: 1rem;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-size: 2.6rem;
+    font-weight: 700;
+    rotate: -6deg;
+  }
+  .guides li:nth-child(even) .guide-letter { rotate: 7deg; }
+  .guide-name { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+  .guide-text { font-size: 1.1rem; line-height: 1.4; }
+</style>

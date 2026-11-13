@@ -1,0 +1,423 @@
+---
+import '@fontsource/fredoka/latin-500.css';
+import '@fontsource/fredoka/latin-600.css';
+import '@fontsource/fredoka/latin-700.css';
+
+interface Props {
+  title?: string;
+  slug?: string;
+}
+const { title, slug } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const nav = [
+  { slug: 'typing-game', label: 'Typing Game', color: 'tomato' },
+  { slug: 'musical-keyboard', label: 'Musical Keyboard', color: 'sky' },
+  { slug: 'build', label: 'Build', color: 'sun' },
+  { slug: 'hardware', label: 'Hardware', color: 'grass' },
+  { slug: 'customize', label: 'Customize', color: 'grape' },
+];
+const page = nav.find((n) => n.slug === slug);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ? `${title} · Gil's Gadgets` : "Gil's Gadgets"}</title>
+    <meta name="description" content="Small computer toys for small children. Offline, keyboard-only gadgets for a Raspberry Pi." />
+    <meta name="theme-color" content="#FFF3DA" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='2' width='28' height='28' rx='7' fill='%23FF5B4A' stroke='%231D1D1B' stroke-width='3'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-weight='700' font-size='19' text-anchor='middle' fill='%231D1D1B'%3EG%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body style={page && `--page: var(--${page.color})`}>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <a class="logo" href={`${base}/`}>
+        <span class="logo-block" aria-hidden="true">G</span>
+        Gil’s Gadgets
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((n) => (
+            <li>
+              <a
+                class="pill"
+                href={`${base}/${n.slug}/`}
+                style={`--c: var(--${n.color})`}
+                aria-current={n.slug === slug ? 'page' : undefined}
+              >{n.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="foot">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <p class="on-confetti">Made for Gil. Shared with every family.</p>
+      <a class="pill" style="--c: var(--paper)" href="https://github.com/agrathwohl/gils-gadgets">Code on GitHub</a>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --ink: #1d1d1b;
+    --cream: #fff3da;
+    --paper: #fffcf3;
+    --tomato: #ff5b4a;
+    --sun: #ffce3a;
+    --sky: #3db7f5;
+    --grass: #46c86a;
+    --grape: #a77bff;
+    --orange: #ff9b2f;
+    --page: var(--orange);
+    --line: 5px;
+    --round: 1.4rem;
+    --font: Fredoka, ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif;
+    --mono: ui-monospace, 'Cascadia Mono', 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+    /* A crayon squiggle, used as a mask so it can take any color. */
+    --squiggle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M2 6c4.5-5 7.5-5 12 0s7.5 5 12 0 7.5-5 12 0' fill='none' stroke='black' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-padding-top: 1rem; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 1rem;
+    font-family: var(--font);
+    font-weight: 500;
+    font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--ink);
+    background-color: var(--cream);
+    /* Confetti: dots scattered over one big tile. */
+    background-image:
+      radial-gradient(circle at 40px 60px, var(--tomato) 5px, transparent 6px),
+      radial-gradient(circle at 215px 25px, var(--sky) 4px, transparent 5px),
+      radial-gradient(circle at 335px 150px, var(--grass) 5px, transparent 6px),
+      radial-gradient(circle at 125px 215px, var(--grape) 4px, transparent 5px),
+      radial-gradient(circle at 270px 300px, var(--orange) 5px, transparent 6px),
+      radial-gradient(circle at 400px 265px, var(--tomato) 4px, transparent 5px),
+      radial-gradient(circle at 25px 345px, var(--sky) 5px, transparent 6px);
+    background-size: 430px 390px;
+  }
+
+  /* Text that sits on the confetti gets a cream halo. */
+  .on-confetti { text-shadow: 0 0 4px var(--cream), 0 0 8px var(--cream), 0 0 12px var(--cream); }
+
+  main { flex: 1; width: 100%; max-width: 75rem; margin-inline: auto; }
+
+  img { max-width: 100%; height: auto; }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 4px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -10rem;
+    z-index: 10;
+    padding: 0.6rem 1.2rem;
+    background: var(--sun);
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    font-weight: 700;
+  }
+  .skip:focus { top: 1rem; }
+
+  /* Header and nav */
+  .top {
+    width: 100%;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding-block: 1.25rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .logo-block {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    aspect-ratio: 1;
+    background: var(--tomato);
+    border: 4px solid var(--ink);
+    border-radius: 0.7rem;
+    box-shadow: 3px 3px 0 var(--ink);
+    rotate: -8deg;
+    transition: rotate 0.2s;
+  }
+  .logo:hover .logo-block { rotate: 8deg; }
+
+  .top ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 0.45em 1.05em;
+    background: var(--c, var(--sun));
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: translate 0.15s, box-shadow 0.15s, rotate 0.15s;
+  }
+  .pill:hover { translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink); rotate: -2deg; }
+  .pill:active, .pill[aria-current='page'] { translate: 3px 3px; box-shadow: 1px 1px 0 var(--ink); rotate: 0deg; }
+  .pill[aria-current='page'] { text-decoration: underline 3px; text-underline-offset: 0.2em; }
+
+  /* Footer */
+  .foot {
+    width: 100%;
+    max-width: 75rem;
+    margin: 4rem auto 0;
+    padding-block: 2rem 2.5rem;
+    border-top: var(--line) dashed var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+    text-align: center;
+  }
+  .foot p { margin: 0; font-weight: 600; font-size: 1.3rem; }
+  .dots { display: inline-flex; gap: 0.35rem; }
+  .dots i {
+    width: 1rem;
+    aspect-ratio: 1;
+    border: 3px solid var(--ink);
+    border-radius: 0.3rem;
+    background: var(--c);
+  }
+  .dots i:nth-child(1) { --c: var(--tomato); rotate: -10deg; }
+  .dots i:nth-child(2) { --c: var(--orange); rotate: 6deg; }
+  .dots i:nth-child(3) { --c: var(--sun); rotate: -4deg; }
+  .dots i:nth-child(4) { --c: var(--grass); rotate: 12deg; }
+  .dots i:nth-child(5) { --c: var(--sky); rotate: -8deg; }
+  .dots i:nth-child(6) { --c: var(--grape); rotate: 5deg; }
+
+  /* Markdown pages */
+  .sheet {
+    max-width: calc(70ch + 2 * var(--pad));
+    margin-inline: auto;
+    --pad: clamp(1.1rem, 5vw, 3.5rem);
+    padding: var(--pad);
+    background: var(--paper);
+    border: var(--line) solid var(--ink);
+    border-top-width: 1.1rem;
+    border-top-color: var(--page);
+    border-radius: 2rem;
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+
+  .prose > :first-child { margin-top: 0; }
+
+  .prose h1, .prose h2, .prose h3 {
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .prose h1 {
+    font-size: clamp(2.6rem, 2rem + 4vw, 4.5rem);
+    margin-bottom: 0.6em;
+  }
+  .prose h1::after {
+    content: '';
+    display: block;
+    width: min(100%, 9em);
+    height: 0.28em;
+    margin-top: 0.15em;
+    background: var(--page);
+    mask: var(--squiggle) 0 50% / auto 100% repeat-x;
+  }
+
+  .prose h2 {
+    font-size: clamp(1.8rem, 1.5rem + 1.6vw, 2.5rem);
+    margin: 2.2em 0 0.6em;
+  }
+  .prose h2::before {
+    content: '';
+    display: inline-block;
+    width: 0.62em;
+    aspect-ratio: 1;
+    margin-right: 0.4em;
+    background: var(--page);
+    border: 4px solid var(--ink);
+    border-radius: 0.2em;
+    rotate: -10deg;
+    vertical-align: 0.02em;
+  }
+
+  .prose h3 { font-size: clamp(1.4rem, 1.25rem + 0.8vw, 1.75rem); margin: 1.8em 0 0.5em; }
+
+  .prose p, .prose li { overflow-wrap: break-word; }
+
+  .prose a {
+    text-decoration: underline 0.18em var(--page);
+    text-underline-offset: 0.2em;
+    text-decoration-skip-ink: none;
+    border-radius: 0.3rem;
+  }
+  .prose a:hover { background: var(--page); text-decoration-color: var(--ink); }
+
+  .prose strong { font-weight: 700; }
+
+  /* Lists: little toy blocks for bullets, numbered blocks for steps. */
+  .prose ul, .prose ol { padding-left: 0; list-style: none; }
+  .prose li { position: relative; padding-left: 2.2rem; margin-block: 0.5em; }
+  .prose ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0.3rem;
+    top: 0.42em;
+    width: 0.8em;
+    aspect-ratio: 1;
+    background: var(--c, var(--page));
+    border: 3px solid var(--ink);
+    border-radius: 0.2em;
+    rotate: 12deg;
+  }
+  .prose ul > li:nth-child(5n + 2) { --c: var(--sun); }
+  .prose ul > li:nth-child(5n + 3) { --c: var(--sky); }
+  .prose ul > li:nth-child(5n + 4) { --c: var(--grass); }
+  .prose ul > li:nth-child(5n + 5) { --c: var(--tomato); }
+  .prose ul > li:nth-child(even)::before { rotate: -9deg; }
+
+  .prose ol { counter-reset: step; }
+  .prose ol > li { counter-increment: step; padding-left: 2.9rem; }
+  .prose ol > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.1rem;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: var(--page);
+    border: 3px solid var(--ink);
+    border-radius: 0.6rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* Keycaps for keys and inline code. */
+  .prose code, kbd {
+    padding: 0.05em 0.4em;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-bottom-width: 4px;
+    border-radius: 0.45em;
+    font-family: var(--mono);
+    font-size: 0.85em;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  kbd { font-family: var(--font); font-weight: 600; background: var(--sun); }
+
+  .prose pre {
+    margin: 1.4em 0;
+    padding: 1.1em 1.3em;
+    overflow-x: auto;
+    border: 4px solid var(--ink);
+    border-radius: var(--round);
+    box-shadow: 6px 6px 0 var(--page);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .prose pre code { padding: 0; background: none; border: 0; font-size: inherit; overflow-wrap: normal; }
+
+  .prose blockquote {
+    margin: 1.6em 0;
+    padding: 0.9em 1.3em;
+    background: var(--sun);
+    border: 4px solid var(--ink);
+    border-radius: var(--round);
+    box-shadow: 6px 6px 0 var(--ink);
+    rotate: -0.6deg;
+  }
+  .prose blockquote p { margin: 0; }
+  .prose blockquote code { background: var(--paper); }
+
+  .scroll {
+    margin: 1.6em 0;
+    overflow-x: auto;
+    border: 4px solid var(--ink);
+    border-radius: var(--round);
+    box-shadow: 6px 6px 0 var(--ink);
+    background: var(--paper);
+  }
+  .prose table { width: 100%; border-collapse: collapse; }
+  .prose th, .prose td { padding: 0.7em 1em; text-align: left; vertical-align: top; }
+  .prose th { background: var(--page); font-weight: 700; border-bottom: 4px solid var(--ink); }
+  .prose td + td, .prose th + th { border-left: 3px solid var(--ink); }
+  .prose tr:nth-child(even) td { background: var(--cream); }
+  .prose td { border-top: 2px dashed var(--ink); }
+  .prose tr:first-child td { border-top: 0; }
+
+  /* Screenshots: black screens with a chunky frame. */
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 1.6rem;
+    margin: 2em 0;
+  }
+  .shots p { margin: 0; }
+  .shots img {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    background: #000;
+    border: var(--line) solid var(--ink);
+    border-radius: var(--round);
+    box-shadow: 6px 6px 0 var(--page);
+    rotate: -1.2deg;
+  }
+  .shots p:nth-child(even) img { rotate: 1.4deg; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

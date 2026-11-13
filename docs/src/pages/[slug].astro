@@ -1,0 +1,27 @@
+---
+import Layout from '../Layout.astro';
+import * as typingGame from '../../../typing-game/README.md';
+import * as musicalKeyboard from '../../../musical-keyboard/README.md';
+import * as build from '../../../BUILD.md';
+import * as hardware from '../../../HARDWARE.md';
+import * as customize from '../../../CUSTOMIZE.md';
+
+export function getStaticPaths() {
+  return Object.entries({
+    'typing-game': typingGame,
+    'musical-keyboard': musicalKeyboard,
+    build,
+    hardware,
+    customize,
+  }).map(([slug, doc]) => ({ params: { slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<Layout title={doc.getHeadings()[0].text} slug={slug}>
+  <article class="sheet prose">
+    <doc.Content />
+  </article>
+</Layout>
