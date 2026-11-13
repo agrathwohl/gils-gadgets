@@ -6,10 +6,13 @@ Gil's Gadgets run on a Raspberry Pi with a screen, a keyboard and speakers. This
 
 - Raspberry Pi 4 Model B
 - 7" HDMI display, 1024x600
-- USB computer keyboard
+- Model M replica keyboard (USB)
 - Akai MPK mini (USB MIDI keyboard with drum pads)
 - Speakers on the Pi's 3.5 mm jack
 - 8 GB microSD card
+- Skip Hop Explore & More activity center, used as a play table
+
+See [Gil's setup](#gils-setup) for how it all fits together.
 
 ## The parts
 
@@ -75,6 +78,16 @@ The Pi 4 has no plug detection on the jack ([checkbox issue #568](https://github
 - Use a case. Small fingers and metal pins do not mix.
 - Fix the Pi and the cables behind the display or under a desk, so that the cables cannot be pulled.
 - Leave only the keyboards where your child can reach them.
+
+### Gil's setup
+
+Gil's gadgets live on a Skip Hop Explore & More activity center, set up in its play table stage.
+
+- The middle of the table has a hollow under the gray round cover. The Pi and all the cables go in there, under the cover. Gil cannot pry at them, and he does not even know that they are there.
+- The 7" HDMI panel stands propped in the keyboard. The keyboard is a Model M replica, heavy and sturdy enough to hold the screen.
+- On the table, Gil sees only the screen and the keyboards.
+
+Any table or box with a closed space under a lid works the same way. Leave some air around the Pi, because it gets warm.
 
 ## Connect it
 
