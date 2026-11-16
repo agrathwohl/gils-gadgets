@@ -48,6 +48,7 @@ INSTRUMENTS = [
     ("trombone", 0, 57),
     ("trumpet", 0, 56),
     ("tuba", 0, 58),
+    ("grand piano", 0, 0),          # Concert Grand
     ("drum kit 1", 128, 0),         # Don's Standard
     ("drum kit 2", 128, 8),         # Room
     ("drum kit 3", 128, 16),        # Power

@@ -16,9 +16,9 @@ Plug a USB MIDI keyboard into the Raspberry Pi and play real instrument sounds. 
 - **Pitch bend, sustain and the knobs** go to the synthesizer as they are.
 - **Any letter on the computer keyboard** closes the musical keyboard.
 
-There are 20 instruments, in this order:
+There are 21 instruments, in this order:
 
-violin, double bass, clarinet, oboe, bassoon, saxophone, trombone, trumpet, tuba, drum kit 1, drum kit 2, drum kit 3, drum kit 4, percussion 1, percussion 2, sound fx, electronic kit 1, electronic kit 2, electronic kit 3, electronic kit 4.
+violin, double bass, clarinet, oboe, bassoon, saxophone, trombone, trumpet, tuba, grand piano, drum kit 1, drum kit 2, drum kit 3, drum kit 4, percussion 1, percussion 2, sound fx, electronic kit 1, electronic kit 2, electronic kit 3, electronic kit 4.
 
 After the last one, it starts again at the violin.
 
