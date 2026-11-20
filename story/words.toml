@@ -1,0 +1,106 @@
+# The words of the story. Every picture is a thing: its file name is the word (see README.md).
+#
+#   [aliases]       Another word for a thing that has a picture, for example your child's name.
+#                   An alias of an alias is another way that the story can hear the word: it shows as that alias.
+#   [actions]       says: the forms of the word that Gil may say. What the first thing does: a move (across,
+#                   arrive, up, down, in, out, hug, or an effect), effects, and speed (2 is twice as fast).
+#                   other: the effects of the second thing. Without it, the second thing stands still.
+#   [descriptions]  to = "thing": it goes to the next thing (or the first, when no thing comes after it),
+#                   with a size (big or small), a color, effects.
+#                   to = "action": it goes to the action, with a move (instead of the action's), a speed, effects.
+#
+# The colors: red, yellow, green, cyan, blue, magenta, white.
+# The effects: rainbow, sparkle, blink, wave, float, bounce, scroll, shake, typewriter, drop.
+# Check your changes with: uv run --with pyfiglet python story.py --check
+
+[aliases]
+gil = "boy"
+gill = "gil"
+doggy = "dog"
+doggie = "dog"
+"puppy dog" = "puppy"
+kitty = "cat"
+"kitty cat" = "cat"
+mommy = "mom"
+mama = "mom"
+daddy = "dad"
+dada = "dad"
+papa = "dad"
+granny = "grandma"
+grandmother = "grandma"
+grandad = "grandpa"
+grandfather = "grandpa"
+"choo choo" = "train"
+"choo choo train" = "train"
+horsey = "horse"
+pony = "horse"
+ducky = "duck"
+birdie = "bird"
+fishy = "fish"
+teddy = "teddy bear"
+plane = "airplane"
+bike = "bicycle"
+fries = "french fries"
+burger = "hamburger"
+donut = "doughnut"
+lolly = "lollipop"
+"fire engine" = "fire truck"
+dino = "dinosaur"
+alligator = "crocodile"
+hippopotamus = "hippo"
+rhinoceros = "rhino"
+flower = "blossom"
+bubble = "bubbles"
+drums = "drum kit"
+pancake = "pancakes"
+grape = "grapes"
+cherry = "cherries"
+telephone = "phone"
+television = "tv"
+sunshine = "sun"
+"merry go round" = "carousel"
+"rocket ship" = "rocket"
+
+[actions]
+goes   = { says = ["go", "goes", "went", "going"], move = "across" }
+comes  = { says = ["come", "comes", "came", "coming"], move = "arrive" }
+jumps  = { says = ["jump", "jumps", "jumped", "jumping", "hop", "hops", "hopped", "hopping"], move = "bounce" }
+runs   = { says = ["run", "runs", "ran", "running"], move = "across", speed = 2 }
+flies  = { says = ["fly", "flies", "flew", "flying"], move = "across", effects = ["float"] }
+swims  = { says = ["swim", "swims", "swam", "swimming"], move = "across", effects = ["wave"] }
+sleeps = { says = ["sleep", "sleeps", "slept", "sleeping"], move = "float", speed = 0.5 }
+sings  = { says = ["sing", "sings", "sang", "singing"], move = "wave" }
+dances = { says = ["dance", "dances", "danced", "dancing"], move = "float", effects = ["wave"], speed = 2 }
+hides  = { says = ["hide", "hides", "hid", "hiding"], move = "in" }
+falls  = { says = ["fall", "falls", "fell", "falling"], move = "drop" }
+hugs   = { says = ["hug", "hugs", "hugged", "hugging"], move = "hug", other = ["hug"] }
+helps  = { says = ["help", "helps", "helped", "helping"], move = "float", other = ["float"] }
+eats   = { says = ["eat", "eats", "ate", "eating"], other = ["in"] }
+shares = { says = ["share", "shares", "shared", "sharing"], effects = ["sparkle"], other = ["sparkle"] }
+plays  = { says = ["play", "plays", "played", "playing"], move = "bounce", other = ["bounce"] }
+sees   = { says = ["see", "sees", "saw", "seeing", "look", "looks", "looked", "looking"], other = ["typewriter"] }
+
+[descriptions]
+big     = { to = "thing", size = "big" }
+small   = { to = "thing", size = "small" }
+silly   = { to = "thing", effects = ["shake"] }
+fun     = { to = "thing", effects = ["rainbow"] }
+happy   = { to = "thing", effects = ["sparkle"] }
+sad     = { to = "thing", color = "blue" }
+hot     = { to = "thing", color = "red", effects = ["wave"] }
+cold    = { to = "thing", color = "cyan", effects = ["shake"] }
+red     = { to = "thing", color = "red" }
+yellow  = { to = "thing", color = "yellow" }
+green   = { to = "thing", color = "green" }
+cyan    = { to = "thing", color = "cyan" }
+blue    = { to = "thing", color = "blue" }
+magenta = { to = "thing", color = "magenta" }
+white   = { to = "thing", color = "white" }
+purple  = { to = "thing", color = "magenta" }
+pink    = { to = "thing", color = "magenta" }
+in      = { to = "action", move = "in" }
+out     = { to = "action", move = "out" }
+up      = { to = "action", move = "up" }
+down    = { to = "action", move = "down" }
+fast    = { to = "action", speed = 2 }
+slow    = { to = "action", speed = 0.5 }

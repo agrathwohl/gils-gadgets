@@ -3,7 +3,8 @@
   # Which Raspberry Pi: "rpi4" or "rpi5"
   board = "rpi4";
 
-  # Which gadgets: any of "typing-game", "musical-keyboard", "musical-numbers", "screen-saver" (Pi 5 only)
+  # Which gadgets: any of "typing-game", "musical-keyboard", "musical-numbers", "screen-saver" (Pi 5 only),
+  # "story" (it needs a USB microphone)
   gadgets = [ "typing-game" "musical-keyboard" "musical-numbers" ];
 
   # Screen mode to force at boot, for a display that does not tell the Pi its size in time

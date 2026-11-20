@@ -161,7 +161,7 @@ Open [`gadgets.nix`](gadgets.nix) and change it for your hardware:
 }
 ```
 
-The [hardware guide](HARDWARE.md) explains `screen` and `midiKeyboard`. The [musical numbers](musical-numbers/README.md#the-phone) explain `phone`, and the [screen saver](screen-saver/README.md#on-the-raspberry-pi) explains `timeZone`. On a Pi 5, choose the typing game or the musical keyboard, not both ([why](HARDWARE.md#sound)). The screen saver is for the Pi 5 only ([why](HARDWARE.md#clock-screen-saver)).
+The [hardware guide](HARDWARE.md) explains `screen` and `midiKeyboard`. The [musical numbers](musical-numbers/README.md#the-phone) explain `phone`, and the [screen saver](screen-saver/README.md#on-the-raspberry-pi) explains `timeZone`. On a Pi 5, choose the typing game or the musical keyboard, not both ([why](HARDWARE.md#sound)). The screen saver is for the Pi 5 only ([why](HARDWARE.md#clock-screen-saver)). The story needs a USB microphone ([why](HARDWARE.md#microphone-story)).
 
 ## 7. Add your own files
 

@@ -1,6 +1,6 @@
 # Hardware guide
 
-Gil's Gadgets run on a Raspberry Pi with a screen, a keyboard and speakers, and the musical numbers add a telephone. This guide tells you what to get and how to connect it. Most parts are common, and you can reuse parts you already have.
+Gil's Gadgets run on a Raspberry Pi with a screen, a keyboard and speakers, the musical numbers add a telephone, and the story adds a microphone. This guide tells you what to get and how to connect it. Most parts are common, and you can reuse parts you already have.
 
 ## What Gil uses
 
@@ -92,6 +92,18 @@ Use a desk phone that speaks SIP (sold as a "VoIP phone" or "IP phone") and has 
 
 With the musical numbers on the card, the Pi's Ethernet port belongs to the phone.
 
+### Microphone (story)
+
+The [story](story/README.md) hears your child through a microphone.
+
+- The Pi has no microphone, and its 3.5 mm jack is only an output ([Raspberry Pi Forums](https://forums.raspberrypi.com/viewtopic.php?t=347214)). Use a USB microphone.
+- Use a microphone that works on Linux without a driver. Many are sold as "plug and play" or "class compliant". Linux has one driver for USB audio devices ([Linux kernel documentation](https://www.kernel.org/doc/html/latest/sound/alsa-configuration.html#module-snd-usb-audio)).
+- To check a microphone, plug it into a Linux computer and run `arecord -l`. The microphone must be in the list.
+- The story uses the first USB microphone that it finds.
+- Put the microphone near your child, and away from the speakers.
+
+Nobody tested the story with a real microphone on a Pi yet.
+
 ### Clock (screen saver)
 
 The [screen saver](screen-saver/README.md) is for the Pi 5 only. It shows on a date, so the Pi must know the date and the time.
@@ -122,6 +134,7 @@ Any table or box with a closed space under a lid works the same way. Leave some 
 3. Connect the computer keyboard and the MIDI keyboard to USB ports.
 4. Connect the speakers (Pi 4: the 3.5 mm jack).
 5. Musical numbers: connect the phone to the Pi's Ethernet port, and connect the phone's power.
-6. Connect the Pi's power supply last. The Pi starts.
+6. Story: connect the microphone to a USB port.
+7. Connect the Pi's power supply last. The Pi starts.
 
 The first boot can take longer than the next ones. Then the first gadget shows on the screen, and the phone shows that it is registered.

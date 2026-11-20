@@ -14,6 +14,7 @@ const routes = {
   'musical-keyboard/README.md': '/musical-keyboard/',
   'musical-numbers/README.md': '/musical-numbers/',
   'screen-saver/README.md': '/screen-saver/',
+  'story/README.md': '/story/',
   'BUILD.md': '/build/',
   'HARDWARE.md': '/hardware/',
   'CUSTOMIZE.md': '/customize/',

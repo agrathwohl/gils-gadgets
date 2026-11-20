@@ -2,9 +2,11 @@
 /musical-numbers/songs/
 /typing-game/audio/
 /musical-keyboard/*.sf2
+/story/clips/
 
 # Build output and tools
 /result*
+/story/models
 /docs/node_modules/
 /docs/dist/
 /docs/.astro/

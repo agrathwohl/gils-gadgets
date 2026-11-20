@@ -1,6 +1,6 @@
 # Customize
 
-Make the gadgets your child's own: their favorite things as words and pictures, your voice saying the letters, their favorite songs on the phone, and messages for their special days. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
+Make the gadgets your child's own: their favorite things as words and pictures, your voice saying the letters, their favorite songs on the phone, messages for their special days, and their own words in their stories. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
 
 ## The typing game
 
@@ -251,6 +251,70 @@ Grandma visits on December 24. From 8:00 to 20:00 on that day, the screen says "
 Then put `"screen-saver"` in `gadgets` in [`gadgets.nix`](gadgets.nix), build and write the card. The screen saver is for the Pi 5 only ([why](HARDWARE.md#clock-screen-saver)).
 
 To make a picture from a photo, use `ascii-image-converter` as in [step 2 of the cube example](#example-add-cube-and-remove-robot).
+
+## The story
+
+Every picture of every gadget is a thing in the story, and the other words are in `story/words.toml`. [Story](story/README.md) explains the words and the rules.
+
+### Example: add an ambulance
+
+Your child is Ada. She loves ambulances, and she calls Grandma "Nana". In this example, you change the name of the child, and you add a picture of an ambulance, the name "Nana", and the action "kicks". All commands run in the `story` folder:
+
+```sh
+cd gils-gadgets/story
+```
+
+**1. Add the picture.** The story's own pictures come from [Noto Emoji](https://github.com/googlefonts/noto-emoji). Find the emoji and its code in the [Unicode emoji list](https://unicode.org/emoji/charts/full-emoji-list.html): the ambulance is `U+1F691`. Add a line with the word and the code at the end of `scripts/emoji.toml`:
+
+```toml
+ambulance = "1f691"
+```
+
+Then make the picture. You need [uv](https://docs.astral.sh/uv/) and `curl`.
+
+```sh
+uv run --with pillow python scripts/make_pictures.py
+```
+
+The script makes `pictures/ambulance.txt`, and it writes the color of the picture in `pictures/colors.toml`. It makes only the pictures that are not there yet.
+
+Any other picture works too. Each picture of the typing game is already a thing in the story, so a picture that you add there ([the cube example](#example-add-cube-and-remove-robot)) works in the story too.
+
+**2. Change the names.** The first two lines under `[aliases]` in `words.toml` are the name of the child:
+
+```toml
+gil = "boy"
+gill = "gil"
+```
+
+Change them to your child's name and picture, and add a line for Nana:
+
+```toml
+ada = "girl"
+nana = "grandma"
+```
+
+The line `gill = "gil"` is another way that the story can hear the name "Gil". The screen shows GIL for the two of them. If the story hears your child's name as a different word, add a line like this for that word. [Test what it hears](story/README.md#test-what-it-hears) shows you the wrong words.
+
+**3. Add an action.** In `words.toml`, add a line under `[actions]`:
+
+```toml
+kicks = { says = ["kick", "kicks", "kicked", "kicking"], move = "shake", other = ["drop"] }
+```
+
+- `says` has the forms of the word that your child can say.
+- `move` is what the first thing does, and `other` is what the second thing does. The comment at the top of `words.toml` lists the moves and the effects.
+
+**4. Check and try.** The check tells you if a word is wrong, for example a name for a thing that has no picture.
+
+```sh
+uv run --with pyfiglet python story.py --check
+uv run --with pyfiglet python story.py --say "the ambulance goes fast" --say "nana kicks the ball" --say "ada hugs nana"
+```
+
+Then put `"story"` in `gadgets` in [`gadgets.nix`](gadgets.nix), build and write the card.
+
+The story does not hear all words equally well. To find out how well it hears your child's words, see [Test what it hears](story/README.md#test-what-it-hears).
 
 ## After every change
 

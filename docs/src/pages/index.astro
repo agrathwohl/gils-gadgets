@@ -7,6 +7,7 @@ import violin from '../../../musical-keyboard/screenshots/violin.png';
 import trumpet from '../../../musical-keyboard/screenshots/trumpet.png';
 import drums from '../../../musical-keyboard/screenshots/drums.png';
 import birthday from '../../../screen-saver/screenshots/birthday.gif';
+import storyGif from '../../../story/screenshots/story.gif';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const colors = ['tomato', 'sun', 'sky', 'grass', 'grape', 'orange'];
@@ -54,12 +55,22 @@ const gadgets = [
       [birthday, 'HAPPY BIRTHDAY GIL! moves in a rainbow wave, MOM+DAD LOVE YOU! types itself, a balloon floats and a cake sparkles.'],
     ],
   },
+  {
+    slug: 'story',
+    name: 'Story',
+    color: 'mint',
+    chip: 'New, in progress',
+    text: 'Say “story” and tell a story. The pictures of the words show on the screen, and they move as the sentence says. It needs a microphone.',
+    frames: [
+      [storyGif, 'A story in three sentences: a rocket flies up, a monkey eats a big banana, and Mommy hugs Daddy.'],
+    ],
+  },
 ];
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
 const why = [
   ['O', 'tomato', 'Offline', 'Nothing on the card uses the internet. Wi-Fi is off. The phone talks to the Pi over one cable. No accounts, no updates, no ads.'],
-  ['K', 'sun', 'Keys only', 'No mouse, no pointer to chase. Press a key or a phone button and something happens. Every action is on purpose.'],
+  ['N', 'sun', 'No mouse', 'No pointer to chase around a screen. Press a key or a phone button, or say a word, and something happens. Every action is on purpose.'],
   ['A', 'sky', 'Letters & numbers', 'The keys have letters on them. The typing game says each letter and builds a word. On the phone, each number is a song.'],
   ['U', 'grass', 'Use it alone', 'No menus, no scores, no timers, no “wrong” sounds. Your child explores without a parent at their shoulder.'],
   ['C', 'grape', 'Curious about computers', 'A real computer, a real keyboard, a real terminal. Not a locked tablet.'],
@@ -68,7 +79,7 @@ const why = [
 const guides = [
   ['build', 'sun', 'B', 'Build', 'Install Nix, build the image, write the SD card.'],
   ['hardware', 'grass', 'H', 'Hardware', 'What to buy and how to connect it.'],
-  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices, instruments, songs and screen savers.'],
+  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices, instruments, songs, screen savers and story words.'],
 ];
 ---
 
@@ -88,7 +99,7 @@ const guides = [
     </h1>
     <p class="tagline on-confetti">Small computer toys for small children.</p>
     <p class="lede on-confetti">
-      Build them onto an SD card, put the card in a Raspberry Pi, and your child plays with a keyboard, a music keyboard and a telephone.
+      Build them onto an SD card, put the card in a Raspberry Pi, and your child plays with a keyboard, a music keyboard, a telephone and a microphone.
       There is no mouse, no internet and no ads. I made them for my son, Gil. Other parents can use them too.
     </p>
   </section>
@@ -98,6 +109,7 @@ const guides = [
     <div class="cards">
       {gadgets.map((g) => (
         <a class="card" href={`${base}/${g.slug}/`} style={`--c: var(--${g.color})`}>
+          {g.chip && <span class="chip">{g.chip}</span>}
           <span class="tv">
             <span class="antenna" aria-hidden="true"></span>
             <span class="screen">
@@ -266,6 +278,7 @@ const guides = [
   }
 
   .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -280,6 +293,18 @@ const guides = [
     transition: rotate 0.2s, translate 0.2s, box-shadow 0.2s;
   }
   .card:nth-child(even) { rotate: 1.2deg; }
+  .chip {
+    position: absolute;
+    top: -1rem;
+    right: 1.2rem;
+    padding: 0.25em 0.8em;
+    background: var(--sun);
+    border: 4px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    font-weight: 700;
+    rotate: 5deg;
+  }
   .card:hover { rotate: 0deg; translate: -4px -4px; box-shadow: 14px 14px 0 var(--ink); }
 
   .tv {
