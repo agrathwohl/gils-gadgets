@@ -35,7 +35,24 @@ Every picture is a thing, and the name of its file is its word. The story has 37
 - 282 pictures in [`pictures/`](pictures/): animals, food, vehicles, people, weather, toys, things at home, places and plants.
 - All the pictures of the [typing game](../typing-game/README.md#words-pictures-and-voices), the [musical keyboard](../musical-keyboard/README.md) and the [screen saver](../screen-saver/README.md).
 
-A thing with more than one picture gets one of them at random, and keeps it for the whole story. Some things have more names: "doggy" is the dog, "mommy" is mom, and "choo choo" is the train. The name of the child is a thing too: "Gil" is the boy.
+A thing with more than one picture gets one of them at random, and keeps it for the whole story. Some things have more names: "doggy" is the dog, "mommy" is mom, and "choo choo" is the train.
+
+### Your child's name
+
+The name of the child is a thing too: "Gil" is the boy. The story knows no other name. For your child's name, change [`words.toml`](words.toml) before you build the SD card. The first two lines under `[aliases]` are the name:
+
+```toml
+gil = "boy"
+gill = "gil"
+```
+
+Put your child's name and a picture in their place. The picture can be any thing, for example `boy`, `girl`, `kid` or `baby`:
+
+```toml
+ada = "girl"
+```
+
+The name goes on the card with the build. You cannot change it on the Pi: to change it later, change `words.toml`, run `./build.sh` and write the card again. [Customize](../CUSTOMIZE.md#example-add-an-ambulance) shows all the steps, and what to do if the story does not hear the name well.
 
 ### Actions
 
@@ -126,6 +143,7 @@ We tested the story with voices of adults that a computer made ([Piper](https://
 ## On the Raspberry Pi
 
 - Put `"story"` in `gadgets` in [`gadgets.nix`](../gadgets.nix), and connect a USB microphone. See [the microphone](../HARDWARE.md#microphone-story).
+- The story knows the name "Gil". For your child's name, change `words.toml` before you build. See [Your child's name](#your-childs-name).
 - With the typing game or the musical keyboard on the card, the story waits on its own console (tty4) and listens for "story". When it goes away, the console from before shows again.
 - Without them, the story shows at boot and always listens for sentences. After 3 quiet minutes, it starts a new story.
 - The story makes no sound, so it works with the other gadgets on a Pi 5 too.

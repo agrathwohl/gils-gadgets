@@ -254,7 +254,7 @@ To make a picture from a photo, use `ascii-image-converter` as in [step 2 of the
 
 ## The story
 
-Every picture of every gadget is a thing in the story, and the other words are in `story/words.toml`. [Story](story/README.md) explains the words and the rules.
+Every picture of every gadget is a thing in the story, and the other words are in `story/words.toml`. [Story](story/README.md) explains the words and the rules. To change only the name of your child, see [Your child's name](story/README.md#your-childs-name).
 
 ### Example: add an ambulance
 
