@@ -123,8 +123,6 @@ We tested the story with voices of adults that a computer made ([Piper](https://
 - Names with more than one word are harder. In 16 sentences with names like "teddy bear" and "magic wand", 8 of 10 known words were found.
 - The name "Gil" is harder too. It was found in about half of 25 sentences with it.
 
-A small child speaks differently from an adult, and nobody tested the story with a child yet.
-
 ## On the Raspberry Pi
 
 - Put `"story"` in `gadgets` in [`gadgets.nix`](../gadgets.nix), and connect a USB microphone. See [the microphone](../HARDWARE.md#microphone-story).
@@ -132,8 +130,6 @@ A small child speaks differently from an adult, and nobody tested the story with
 - Without them, the story shows at boot and always listens for sentences. After 3 quiet minutes, it starts a new story.
 - The story makes no sound, so it works with the other gadgets on a Pi 5 too.
 - The speech recognition is [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), and it runs on the Pi. While the story waits, a small model listens only for "story" ([keyword spotting](https://k2-fsa.github.io/sherpa/onnx/kws/index.html)). While the story shows, a bigger model hears whole sentences ([`models.nix`](models.nix)). The build downloads the two models, 48 MB together, and puts them on the card.
-
-Nobody tested the story on a real Pi yet.
 
 ## The pictures
 

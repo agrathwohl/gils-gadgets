@@ -102,8 +102,6 @@ The [story](story/README.md) hears your child through a microphone.
 - The story uses the first USB microphone that it finds.
 - Put the microphone near your child, and away from the speakers.
 
-Nobody tested the story with a real microphone on a Pi yet.
-
 ### Clock (screen saver)
 
 The [screen saver](screen-saver/README.md) is for the Pi 5 only. It shows on a date, so the Pi must know the date and the time.
