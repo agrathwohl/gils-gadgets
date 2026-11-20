@@ -92,6 +92,13 @@ Use a desk phone that speaks SIP (sold as a "VoIP phone" or "IP phone") and has 
 
 With the musical numbers on the card, the Pi's Ethernet port belongs to the phone.
 
+### Clock (screen saver)
+
+The [screen saver](screen-saver/README.md) is for the Pi 5 only. It shows on a date, so the Pi must know the date and the time.
+
+- **Pi 5:** it has a clock. With a battery on the J5 (BAT) connector, the clock keeps the time when the power is off ([Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#real-time-clock-rtc)). Nobody tested this with Gil's Gadgets yet.
+- **Pi 4:** it has no clock that keeps the time when the power is off. It gets the time from the network ([Raspberry Pi Forums](https://forums.raspberrypi.com/viewtopic.php?t=323999)), but Gil's Gadgets are offline.
+
 ### Case and cables
 
 - Use a case. Small fingers and metal pins do not mix.

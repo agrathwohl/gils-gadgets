@@ -157,10 +157,11 @@ Open [`gadgets.nix`](gadgets.nix) and change it for your hardware:
   screen = "1024x600";                             # or null for a monitor or TV
   midiKeyboard = "MPK mini";                       # see `aconnect -l`
   phone = { user = "gil"; password = "gil"; };     # the SIP account of the phone
+  timeZone = "America/Chicago";                    # for the screen saver times
 }
 ```
 
-The [hardware guide](HARDWARE.md) explains `screen` and `midiKeyboard`. The [musical numbers](musical-numbers/README.md#the-phone) explain `phone`. On a Pi 5, choose the typing game or the musical keyboard, not both ([why](HARDWARE.md#sound)).
+The [hardware guide](HARDWARE.md) explains `screen` and `midiKeyboard`. The [musical numbers](musical-numbers/README.md#the-phone) explain `phone`, and the [screen saver](screen-saver/README.md#on-the-raspberry-pi) explains `timeZone`. On a Pi 5, choose the typing game or the musical keyboard, not both ([why](HARDWARE.md#sound)). The screen saver is for the Pi 5 only ([why](HARDWARE.md#clock-screen-saver)).
 
 ## 7. Add your own files
 

@@ -1,6 +1,6 @@
 # Customize
 
-Make the gadgets your child's own: their favorite things as words and pictures, your voice saying the letters, and their favorite songs on the phone. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
+Make the gadgets your child's own: their favorite things as words and pictures, your voice saying the letters, their favorite songs on the phone, and messages for their special days. Everything is a plain file in a folder. You change the files, build a new image, and write it to the SD card.
 
 ## The typing game
 
@@ -210,6 +210,47 @@ ls songs/
 - To take a number away, delete its file. The number then does not connect.
 
 Then build and write the card. When your child presses 3, the twinkle song plays.
+
+## The screen saver
+
+The screen savers are in `screen-saver/screensavers.toml`, and their pictures are in `screen-saver/pictures/`. [Screen Saver](screen-saver/README.md) explains all the settings and the effects.
+
+### Example: a screen saver for Grandma's visit
+
+Grandma visits on December 24. From 8:00 to 20:00 on that day, the screen says "Grandma Is Here!" with a star.
+
+1. Copy a picture. Any typing game picture works:
+
+   ```sh
+   cd gils-gadgets/screen-saver
+   cp ../typing-game/assets/ascii/star.txt pictures/star.txt
+   ```
+
+2. Add this at the end of `screensavers.toml`:
+
+   ```toml
+   ["Grandma's Visit"]
+   when = "* 8-19 24 12 *"
+   idle-minutes = 5
+   lines = [
+     { text = "Grandma Is Here!", effects = ["rainbow", "bounce"] },
+   ]
+   pictures = [
+     { file = "pictures/star.txt", color = "yellow", effects = ["sparkle", "float"] },
+   ]
+   ```
+
+   `* 8-19 24 12 *` is every minute from 8:00 to 19:59 on December 24.
+
+3. Try it on your computer. Press any key to stop it.
+
+   ```sh
+   uv run --with pyfiglet python screensaver.py "Grandma's Visit"
+   ```
+
+Then put `"screen-saver"` in `gadgets` in [`gadgets.nix`](gadgets.nix), build and write the card. The screen saver is for the Pi 5 only ([why](HARDWARE.md#clock-screen-saver)).
+
+To make a picture from a photo, use `ascii-image-converter` as in [step 2 of the cube example](#example-add-cube-and-remove-robot).
 
 ## After every change
 

@@ -13,6 +13,7 @@ const routes = {
   'typing-game/README.md': '/typing-game/',
   'musical-keyboard/README.md': '/musical-keyboard/',
   'musical-numbers/README.md': '/musical-numbers/',
+  'screen-saver/README.md': '/screen-saver/',
   'BUILD.md': '/build/',
   'HARDWARE.md': '/hardware/',
   'CUSTOMIZE.md': '/customize/',

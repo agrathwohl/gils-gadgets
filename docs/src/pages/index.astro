@@ -6,6 +6,7 @@ import done from '../../../typing-game/screenshots/done.png';
 import violin from '../../../musical-keyboard/screenshots/violin.png';
 import trumpet from '../../../musical-keyboard/screenshots/trumpet.png';
 import drums from '../../../musical-keyboard/screenshots/drums.png';
+import birthday from '../../../screen-saver/screenshots/birthday.gif';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const colors = ['tomato', 'sun', 'sky', 'grass', 'grape', 'orange'];
@@ -44,6 +45,15 @@ const gadgets = [
     text: 'Pick up a real telephone and press one number. The phone plays the song for that number.',
     keypad: true,
   },
+  {
+    slug: 'screen-saver',
+    name: 'Screen Saver',
+    color: 'pink',
+    text: 'On a special day, big words and pictures move on the screen when nobody uses it. A key press makes it go away. For the Pi 5 only.',
+    frames: [
+      [birthday, 'HAPPY BIRTHDAY GIL! moves in a rainbow wave, MOM+DAD LOVE YOU! types itself, a balloon floats and a cake sparkles.'],
+    ],
+  },
 ];
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
@@ -58,7 +68,7 @@ const why = [
 const guides = [
   ['build', 'sun', 'B', 'Build', 'Install Nix, build the image, write the SD card.'],
   ['hardware', 'grass', 'H', 'Hardware', 'What to buy and how to connect it.'],
-  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices, instruments and songs.'],
+  ['customize', 'grape', 'C', 'Customize', 'Add your own words, pictures, voices, instruments, songs and screen savers.'],
 ];
 ---
 
@@ -319,6 +329,7 @@ const guides = [
   }
   .screen img:nth-child(1) { animation-delay: -6s; }
   .screen img:nth-child(2) { animation-delay: -3s; }
+  .screen img:only-child { animation: none; } /* an animated GIF */
   /* Each frame shows for 3 seconds, the last one first: the game plays itself.
      With reduced motion the animation is off and the last frame, on top, stays. */
   @keyframes frame {

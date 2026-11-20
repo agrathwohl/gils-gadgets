@@ -21,6 +21,7 @@ I made Gil's Gadgets for my son, Gil. Other parents can use them too.
 | [Typing game](typing-game/README.md) | A big letter shows. Your child types it. A picture shows a little more with each letter, and a voice says the letter. At the end, the voice says the word. |
 | [Musical keyboard](musical-keyboard/README.md) | Plug in a USB MIDI keyboard and play real instrument sounds. A picture of the instrument fills the screen. |
 | [Musical numbers](musical-numbers/README.md) | Pick up a real telephone and press one number. The phone plays the song for that number. |
+| [Screen saver](screen-saver/README.md) | On a special day, big words and pictures move on the screen when nobody uses it. On Gil's birthday: "Happy Birthday Gil!" with a balloon and a cake. For the Pi 5 only. |
 
 ![The typing game: the word TRUCK is done and the whole truck shows](typing-game/screenshots/done.png)
 
@@ -41,19 +42,20 @@ The [build guide](BUILD.md) gives every step, including how to install Nix on Li
 
 - [Build guide](BUILD.md): install Nix, build the image, write the SD card.
 - [Hardware guide](HARDWARE.md): what to buy and how to connect it.
-- [Customize](CUSTOMIZE.md): add your own words, pictures, voices, instruments and songs.
+- [Customize](CUSTOMIZE.md): add your own words, pictures, voices, instruments, songs and screen savers.
 
 ## What is in this repository
 
 | Path | What it is |
 | --- | --- |
-| `gadgets.nix` | Your choices: which Pi, which gadgets, screen mode, MIDI keyboard name, phone account. |
+| `gadgets.nix` | Your choices: which Pi, which gadgets, screen mode, MIDI keyboard name, phone account, time zone. |
 | `build.sh` | Builds the SD card image. |
 | `flake.nix`, `flake.lock` | The Nix build. It uses [nixos-raspberrypi](https://github.com/nvmd/nixos-raspberrypi). |
 | `boards/` | Settings for each Raspberry Pi model. |
 | `typing-game/` | The typing game. |
 | `musical-keyboard/` | The musical keyboard. |
 | `musical-numbers/` | The musical numbers. |
+| `screen-saver/` | The screen saver. |
 | `docs/` | The website. |
 
 Each gadget is a folder with its code and a `gadget.nix` file that puts it on the card.

@@ -1,0 +1,22 @@
+# The screen savers. Each one starts with its name in [brackets]. See README.md.
+#
+#   when          Crontab time: minute, hour, day of month, month, day of week.
+#                 The screen saver can show during these minutes. "* * 10 11 *" is every minute of November 10.
+#   idle-minutes  Show the screen saver after this many minutes with no key press and no change on the screen.
+#   lines         One or two lines of text, in big letters.
+#   pictures      None, one or two pictures, from pictures/.
+#
+# A line or a picture can have a color: red, yellow, green, cyan, blue, magenta or white (the default).
+# It can also have effects: rainbow, sparkle, blink, wave, float, bounce, scroll, shake, typewriter, drop.
+
+["Gil's Birthday"]
+when = "* * 10 11 *"
+idle-minutes = 10
+lines = [
+  { text = "Happy Birthday Gil!", effects = ["rainbow", "wave"] },
+  { text = "Mom+Dad Love You!", color = "magenta", effects = ["typewriter"] },
+]
+pictures = [
+  { file = "pictures/balloon.txt", color = "red", effects = ["float"] },
+  { file = "pictures/cake.txt", color = "yellow", effects = ["sparkle"] },
+]
