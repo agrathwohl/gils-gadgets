@@ -3,7 +3,7 @@
 #   [aliases]       Another word for a thing that has a picture, for example your child's name.
 #                   An alias of an alias is another way that the story can hear the word: it shows as that alias.
 #   [actions]       says: the forms of the word that Gil may say. What the first thing does: a move (across,
-#                   arrive, up, down, in, out, hug, or an effect), effects, and speed (2 is twice as fast).
+#                   arrive, up, down, in, out, hug, or an effect), effects, a color, and speed (2 is twice as fast).
 #                   other: the effects of the second thing. Without it, the second thing stands still.
 #   [descriptions]  to = "thing": it goes to the next thing (or the first, when no thing comes after it),
 #                   with a size (big or small), a color, effects.
@@ -68,7 +68,7 @@ jumps  = { says = ["jump", "jumps", "jumped", "jumping", "hop", "hops", "hopped"
 runs   = { says = ["run", "runs", "ran", "running"], move = "across", speed = 2 }
 flies  = { says = ["fly", "flies", "flew", "flying"], move = "across", effects = ["float"] }
 swims  = { says = ["swim", "swims", "swam", "swimming"], move = "across", effects = ["wave"] }
-sleeps = { says = ["sleep", "sleeps", "slept", "sleeping"], move = "float", speed = 0.5 }
+sleeps = { says = ["sleep", "sleeps", "slept", "sleeping", "nap", "naps", "napped", "napping"], move = "float", speed = 0.5 }
 sings  = { says = ["sing", "sings", "sang", "singing"], move = "wave" }
 dances = { says = ["dance", "dances", "danced", "dancing"], move = "float", effects = ["wave"], speed = 2 }
 hides  = { says = ["hide", "hides", "hid", "hiding"], move = "in" }
@@ -79,6 +79,11 @@ eats   = { says = ["eat", "eats", "ate", "eating"], other = ["in"] }
 shares = { says = ["share", "shares", "shared", "sharing"], effects = ["sparkle"], other = ["sparkle"] }
 plays  = { says = ["play", "plays", "played", "playing"], move = "bounce", other = ["bounce"] }
 sees   = { says = ["see", "sees", "saw", "seeing", "look", "looks", "looked", "looking"], other = ["typewriter"] }
+laughs = { says = ["laugh", "laughs", "laughed", "laughing"], move = "shake", effects = ["sparkle"], speed = 2 }
+cries  = { says = ["cry", "cries", "cried", "crying"], move = "shake", color = "blue" }
+gets   = { says = ["get", "gets", "got", "getting"], move = "hug" }
+connects = { says = ["connect", "connects", "connected", "connecting"], move = "hug", other = ["hug"] }
+"turns into" = { says = ["turn into", "turns into", "turned into", "turning into"], move = "in", other = ["out"] }
 
 [descriptions]
 big     = { to = "thing", size = "big" }
@@ -89,6 +94,7 @@ happy   = { to = "thing", effects = ["sparkle"] }
 sad     = { to = "thing", color = "blue" }
 hot     = { to = "thing", color = "red", effects = ["wave"] }
 cold    = { to = "thing", color = "cyan", effects = ["shake"] }
+lost    = { to = "thing", effects = ["blink"] }
 red     = { to = "thing", color = "red" }
 yellow  = { to = "thing", color = "yellow" }
 green   = { to = "thing", color = "green" }

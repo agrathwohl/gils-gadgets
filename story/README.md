@@ -64,7 +64,7 @@ The name goes on the card with the build. You cannot change it on the Pi: to cha
 | runs | It moves across the screen, fast. | |
 | flies | It floats across the screen. | |
 | swims | It moves across the screen in a wave. | |
-| sleeps | It floats slowly. | |
+| sleeps, naps | It floats slowly. | |
 | sings | A wave goes through it. | |
 | dances | It floats and waves, fast. | |
 | hides | It gets small and goes away. | |
@@ -75,6 +75,11 @@ The name goes on the card with the build. You cannot change it on the Pi: to cha
 | shares | It sparkles. | It sparkles too. |
 | plays | It bounces. | It bounces too. |
 | sees, looks | | It shows from left to right, a little at a time. |
+| laughs | It shakes and sparkles. | |
+| cries | It is blue and shakes. | |
+| gets | It moves to the second thing. | |
+| connects | It moves to the second thing until they touch. | It moves to the first thing. |
+| turns into | It gets small and goes away. | It grows from the place where the first thing went away. |
 
 Your child can say an action in other forms: "go", "goes", "went" and "going" are the same action.
 
@@ -90,6 +95,7 @@ Your child can say an action in other forms: "go", "goes", "went" and "going" ar
 | sad | The next thing is blue. |
 | hot | The next thing is red, and a wave goes through it. |
 | cold | The next thing is cyan and shakes. |
+| lost | The next thing goes on and off: "the dog lost the ball". |
 | up, down | The first thing moves up or down: "jumps up", "falls down". |
 | in, out | The first thing goes into the second thing, or comes out of it: "goes in the house". |
 | fast, slow | The action is two times as fast, or half as fast. |

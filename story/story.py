@@ -172,7 +172,9 @@ def layout(story, pictures, h, w):
         braille = all("\u2800" <= ch <= "\u28ff" for ch in text if ch not in " \n")
         if braille and changes.get("size") == "small":
             lines = scale(lines, 0.5)
-        shown.append((lines, braille, changes, changes.get("color", PICTURE_COLORS.get(path.stem, "white"))))
+        # the color of an action ("cries") is for the first thing
+        color = changes.get("color") or not shown and action.get("color") or PICTURE_COLORS.get(path.stem, "white")
+        shown.append((lines, braille, changes, color))
     if len(shown) == 2 and max(len(line) for lines, *_ in shown for line in lines) > w // 2:
         shown = shown[:1]  # too wide for half the screen: the first thing shows alone
     box, items = w // max(1, len(shown)), []
@@ -322,6 +324,10 @@ def check():
         ("the cold penguin helps the polar bear", "cyan shake penguin, polar bear / helps float"),
         ("the silly monkey falls down", "shake monkey / falls down"),
         ("the girl and the big red dog share the cake", "girl, big red dog / shares"),
+        ("the baby naps", "baby / sleeps float x0.5"),
+        ("the frog turns into a prince", "frog, prince / turns into in"),
+        ("the dog gets lost", "blink dog / gets hug"),
+        ("the dog lost the ball", "dog, blink ball / -"),
     ]
     for text, want in samples:
         got = scene(*parse(known(text)))
@@ -331,6 +337,7 @@ def check():
                        ("small", "small dog / -"), ("the cat sleeps", "cat / sleeps float x0.5")]:
         got = scene(*parse(known(text), hero))
         assert got == want, f"after \"the big dog\", {text!r}: {got!r}, not {want!r}"
+    assert layout([known("the baby cries")], {}, 66, 204)[0][0].color == "blue", "the color of an action"
     print(f"All right: {len(samples)} sentences, {len(phrases())} phrases")
 
 
